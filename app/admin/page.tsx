@@ -78,7 +78,7 @@ export default function AdminPage() {
           'Content-Type': 'application/json',
           'x-admin-secret': secret,
         },
-        body: JSON.stringify({ pathname: p.url }),
+        body: JSON.stringify({ pathname }),
       });
       if (!res.ok) {
         setError('Delete failed — check your admin key and try again');
