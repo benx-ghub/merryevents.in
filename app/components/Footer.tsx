@@ -30,9 +30,9 @@ export default function Footer() {
               </a>
             </li>
             <li>
-  <a href="tel:+919400876544">0000000000</a>
+  <a href="tel:+919400876544">+91 94008 76544</a>
   {' / '}
-  <a href="tel:9999999999">9999999999</a>
+  <a href="tel:+918590253164">+91 85902 53164</a>
 </li>
             <li>merryevents.in</li>
           </ul>
