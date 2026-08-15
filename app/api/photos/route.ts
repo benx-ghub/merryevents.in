@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getPhotos, addPhoto, deletePhoto } from '../../../lib/photos';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 function isAuthorized(req: NextRequest) {
   const secret = req.headers.get('x-admin-secret');
   return Boolean(secret) && secret === process.env.ADMIN_SECRET;
