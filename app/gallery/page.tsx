@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { getPhotos } from '@/lib/photos';
+import { getPhotos } from '../../lib/photos';
 
 export const revalidate = 0;
 
