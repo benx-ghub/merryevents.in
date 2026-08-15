@@ -1,4 +1,4 @@
-import { put, list } from '@vercel/blob';
+import { put, list, del } from '@vercel/blob';
 
 const FEATURED_KEY = 'meta/featured.json';
 
@@ -17,10 +17,18 @@ export async function getFeaturedUrl(): Promise<string | null> {
 }
 
 export async function setFeaturedUrl(url: string): Promise<void> {
+  try {
+    const { blobs } = await list({ prefix: FEATURED_KEY });
+    const existing = blobs.find((b) => b.pathname === FEATURED_KEY);
+    if (existing) {
+      await del(existing.url);
+    }
+  } catch {
+    // nothing to delete yet, that's fine
+  }
   await put(FEATURED_KEY, JSON.stringify({ url }), {
     access: 'public',
     contentType: 'application/json',
     addRandomSuffix: false,
-    allowOverwrite: true,
   });
 }
