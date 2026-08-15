@@ -29,14 +29,8 @@ export default function Footer() {
                 merryevents.in@gmail.com
               </a>
             </li>
-            <li>
-              <a href="tel:+919400876544" className="hover:text-cream">+91 94008 76544</a>
-              {' / '}
-              <a href="tel:+918590253164" className="hover:text-cream">+91 85902 53164</a>
-            </li>
-            <li>
-              <a href="https://merryevents.in" className="hover:text-cream">merryevents.in</a>
-            </li>
+            <li>0000000000 / 9999999999</li>
+            <li>merryevents.in</li>
           </ul>
         </div>
 
@@ -45,7 +39,7 @@ export default function Footer() {
             Follow
           </p>
           <div className="flex items-center gap-4">
-            
+            <a
               href="https://instagram.com/merryevents.in"
               target="_blank"
               rel="noopener noreferrer"
@@ -58,7 +52,7 @@ export default function Footer() {
                 <circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none" />
               </svg>
             </a>
-            
+            <a
               href="#"
               target="_blank"
               rel="noopener noreferrer"
