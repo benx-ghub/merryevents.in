@@ -62,7 +62,7 @@ export default async function Home() {
 
         <div className="mt-16 grid md:grid-cols-3 gap-6 items-stretch text-left">
           <div className="bg-stone rounded-2xl p-8">
-            <p className="font-display text-3xl mb-2">10+</p>
+            <p className="font-display text-3xl mb-2">11+</p>
             <p className="text-ink/60 text-sm">Years of experience planning celebrations across Kerala.</p>
           </div>
           <div className="bg-stone rounded-2xl p-8">
