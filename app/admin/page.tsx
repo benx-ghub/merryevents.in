@@ -10,6 +10,7 @@ export default function AdminPage() {
   const [secret, setSecret] = useState('');
   const [unlocked, setUnlocked] = useState(false);
   const [photos, setPhotos] = useState<Photo[]>([]);
+  const [featuredUrl, setFeaturedUrlState] = useState<string | null>(null);
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
@@ -23,15 +24,20 @@ export default function AdminPage() {
   }, []);
 
   const load = useCallback(async (key: string) => {
-    const [photosRes, enquiriesRes] = await Promise.all([
+    const [photosRes, enquiriesRes, featuredRes] = await Promise.all([
       fetch('/api/photos'),
       fetch('/api/enquiry', { headers: { 'x-admin-secret': key } }),
+      fetch('/api/featured'),
     ]);
     const photosData = await photosRes.json();
     setPhotos(photosData.photos || []);
     if (enquiriesRes.ok) {
       const enquiriesData = await enquiriesRes.json();
       setEnquiries(enquiriesData.enquiries || []);
+    }
+    if (featuredRes.ok) {
+      const featuredData = await featuredRes.json();
+      setFeaturedUrlState(featuredData.url || null);
     }
   }, []);
 
@@ -90,6 +96,26 @@ export default function AdminPage() {
     }
   }
 
+  async function handleSetFeatured(url: string) {
+    try {
+      const res = await fetch('/api/featured', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-secret': secret,
+        },
+        body: JSON.stringify({ url }),
+      });
+      if (!res.ok) {
+        setError('Could not set featured photo — check your admin key');
+        return;
+      }
+      setFeaturedUrlState(url);
+    } catch {
+      setError('Could not set featured photo — check your connection');
+    }
+  }
+
   if (!unlocked) {
     return (
       <main className="max-w-sm mx-auto px-6 py-24">
@@ -138,12 +164,27 @@ export default function AdminPage() {
           {photos.map((p) => (
             <div key={p.pathname} className="relative group rounded-xl overflow-hidden aspect-square bg-stone">
               <Image src={p.url} alt="" fill className="object-cover" />
-              <button
-                onClick={() => handleDelete(p.url)}
-                className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                Delete
-              </button>
+              {featuredUrl === p.url && (
+                <span className="absolute top-2 left-2 bg-gold text-ink text-xs px-2 py-1 rounded-md font-medium">
+                  Featured
+                </span>
+              )}
+              <div className="absolute top-2 right-2 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                {featuredUrl !== p.url && (
+                  <button
+                    onClick={() => handleSetFeatured(p.url)}
+                    className="bg-black/70 text-white text-xs px-2 py-1 rounded-md"
+                  >
+                    Set as Featured
+                  </button>
+                )}
+                <button
+                  onClick={() => handleDelete(p.url)}
+                  className="bg-black/70 text-white text-xs px-2 py-1 rounded-md"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
           {photos.length === 0 && (
