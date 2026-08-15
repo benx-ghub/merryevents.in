@@ -31,6 +31,6 @@ export async function addPhoto(file: File): Promise<Photo> {
   };
 }
 
-export async function deletePhoto(pathname: string): Promise<void> {
-  await del(pathname);
+export async function deletePhoto(url: string): Promise<void> {
+  await del(url);
 }
