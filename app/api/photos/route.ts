@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPhotos, addPhoto, deletePhoto } from '@/lib/photos';
+import { getPhotos, addPhoto, deletePhoto } from '../../../lib/photos';
 
 function isAuthorized(req: NextRequest) {
   const secret = req.headers.get('x-admin-secret');
