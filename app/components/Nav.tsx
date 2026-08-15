@@ -24,8 +24,8 @@ export default function Nav() {
           <Image
             src="/merryevents-logo.png"
             alt="Merry Events"
-            width={200}
-            height={53}
+            width={220}
+            height={58}
             priority
           />
         </Link>
