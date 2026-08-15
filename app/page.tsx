@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import EnquiryForm from './components/EnquiryForm';
 import { getPhotos } from '../lib/photos';
+import { getFeaturedUrl } from '../lib/featured';
 
 export const revalidate = 0;
 
@@ -16,6 +17,9 @@ const services = [
 
 export default async function Home() {
   const photos = await getPhotos();
+  const featuredUrl = await getFeaturedUrl();
+  const featured = photos.find((p) => p.url === featuredUrl);
+  const heroPhoto = featured || photos[0];
   const preview = photos.slice(0, 6);
 
   return (
@@ -38,9 +42,9 @@ export default async function Home() {
         </div>
         <div className="relative min-h-[360px] md:min-h-0 border-t md:border-t-0 md:border-l border-ink/10 flex items-center justify-center p-10 bg-clay/30">
           <div className="relative w-full max-w-sm aspect-[4/5] rounded-2xl overflow-hidden shadow-xl rotate-1 bg-stone">
-            {preview[0] ? (
+            {heroPhoto ? (
               <Image
-                src={preview[0].url}
+                src={heroPhoto.url}
                 alt=""
                 fill
                 className="object-cover"
@@ -62,7 +66,7 @@ export default async function Home() {
 
         <div className="mt-16 grid md:grid-cols-3 gap-6 items-stretch text-left">
           <div className="bg-stone rounded-2xl p-8">
-            <p className="font-display text-3xl mb-2">11+</p>
+            <p className="font-display text-3xl mb-2">10+</p>
             <p className="text-ink/60 text-sm">Years of experience planning celebrations across Kerala.</p>
           </div>
           <div className="bg-stone rounded-2xl p-8">
@@ -108,7 +112,7 @@ export default async function Home() {
 
         {preview.length === 0 ? (
           <p className="text-ink/50 text-sm">
-            No photos yet — upload some
+            No photos yet — upload some from the admin panel to fill this
             gallery.
           </p>
         ) : (
