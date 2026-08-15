@@ -78,7 +78,7 @@ export default function AdminPage() {
           'Content-Type': 'application/json',
           'x-admin-secret': secret,
         },
-        body: JSON.stringify({ pathname }),
+        body: JSON.stringify({ pathname: p.url }),
       });
       if (!res.ok) {
         setError('Delete failed — check your admin key and try again');
@@ -139,7 +139,7 @@ export default function AdminPage() {
             <div key={p.pathname} className="relative group rounded-xl overflow-hidden aspect-square bg-stone">
               <Image src={p.url} alt="" fill className="object-cover" />
               <button
-                onClick={() => handleDelete(p.pathname)}
+                onClick={() => handleDelete(p.url)}
                 className="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 Delete
