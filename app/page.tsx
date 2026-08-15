@@ -108,7 +108,7 @@ export default async function Home() {
 
         {preview.length === 0 ? (
           <p className="text-ink/50 text-sm">
-            No photos yet — upload some from the admin panel to fill this
+            No photos yet — upload some
             gallery.
           </p>
         ) : (
