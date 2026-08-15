@@ -4,7 +4,7 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Merry Events | Event Planning & Design',
+  title: 'Merry Events | Event Planner at Kottayam Kerala',
   description:
     'Merry Events crafts weddings and celebrations with seamless execution, stunning design, and heartfelt experiences.',
 };
