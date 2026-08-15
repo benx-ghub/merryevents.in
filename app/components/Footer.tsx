@@ -29,7 +29,11 @@ export default function Footer() {
                 merryevents.in@gmail.com
               </a>
             </li>
-            <li>0000000000 / 9999999999</li>
+            <li>
+  <a href="tel:+919400876544">0000000000</a>
+  {' / '}
+  <a href="tel:9999999999">9999999999</a>
+</li>
             <li>merryevents.in</li>
           </ul>
         </div>
