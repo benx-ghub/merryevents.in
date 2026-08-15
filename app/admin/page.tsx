@@ -71,15 +71,23 @@ export default function AdminPage() {
   }
 
   async function handleDelete(pathname: string) {
-    await fetch('/api/photos', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-admin-secret': secret,
-      },
-      body: JSON.stringify({ pathname }),
-    });
-    setPhotos((prev) => prev.filter((p) => p.pathname !== pathname));
+    try {
+      const res = await fetch('/api/photos', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-secret': secret,
+        },
+        body: JSON.stringify({ pathname }),
+      });
+      if (!res.ok) {
+        setError('Delete failed — check your admin key and try again');
+        return;
+      }
+      setPhotos((prev) => prev.filter((p) => p.pathname !== pathname));
+    } catch {
+      setError('Delete failed — check your connection and try again');
+    }
   }
 
   if (!unlocked) {
