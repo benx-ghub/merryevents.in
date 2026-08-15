@@ -28,9 +28,14 @@ export default function Footer() {
               <a href="mailto:merryevents.in@gmail.com" className="hover:text-cream">
                 merryevents.in@gmail.com
               </a>
+            <li>
+              <a href="tel:+919400876544" className="hover:text-cream">+91 94008 76544</a>
+              {' / '}
+              <a href="tel:+918590253164" className="hover:text-cream">+91 85902 53164</a>
             </li>
-            <li>0000000000 / 9999999999</li>
-            <li>merryevents.in</li>
+            <li>
+              <a href="https://merryevents.in" className="hover:text-cream">merryevents.in</a>
+            </li>
           </ul>
         </div>
 
