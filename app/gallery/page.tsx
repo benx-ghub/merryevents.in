@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import { getPhotos } from '../../lib/photos';
+import GalleryGrid from '../components/GalleryGrid';
 
 export const revalidate = 0;
 
@@ -16,19 +16,7 @@ export default async function GalleryPage() {
       {photos.length === 0 ? (
         <p className="text-ink/50 text-sm">Photos coming soon.</p>
       ) : (
-        <div className="columns-2 md:columns-3 gap-4 [column-fill:_balance]">
-          {photos.map((p) => (
-            <div key={p.url} className="mb-4 break-inside-avoid rounded-xl overflow-hidden">
-              <Image
-                src={p.url}
-                alt=""
-                width={600}
-                height={600}
-                className="w-full h-auto object-cover"
-              />
-            </div>
-          ))}
-        </div>
+        <GalleryGrid photos={photos} />
       )}
     </main>
   );
